@@ -43,7 +43,7 @@ const CarouselSection = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center"
         >
-          <h3 className="text-2xl md:text-3xl text-white/90 mb-6 font-medium font-sf-pro">
+          <h3 className="text-xl md:text-2xl font-medium mb-6 bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 bg-clip-text text-transparent font-sf-pro">
             Ready to customize your own LuminX experience?
           </h3>
           <Button 
