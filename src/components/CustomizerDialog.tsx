@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment, ContactShadows, Html, BakeShadows, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Colors for customization (Apple Vision Pro inspired palette)
+// Colors for customization (Sunglasses-inspired palette)
 const frameColors = [
   { name: 'Space Gray', value: '#353535' },
   { name: 'Titanium', value: '#D4D4D2' },
@@ -25,11 +24,11 @@ const lensColors = [
   { name: 'Mirrored', value: '#FFFFFF', opacity: 0.3, metalness: 1.0 },
 ];
 
-// Apple Vision Pro inspired model
-const VisionProGlassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
-  const groupRef = useRef<THREE.Group>(null);
+// Sunglasses-style model (bean/aviator shape)
+const SunglassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
+  const groupRef = useRef(null);
   
-  // Apple-like premium materials
+  // Premium materials
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(frameColor),
     metalness: 0.9,
@@ -57,9 +56,10 @@ const VisionProGlassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal =
 
   return (
     <group ref={groupRef} scale={[1.2, 1.2, 1.2]} rotation={[0, 0, 0]}>
-      {/* Main frame - wrap-around curved style like Vision Pro */}
+      {/* Main frame - bean/aviator shape like the emoji */}
       <mesh castShadow receiveShadow position={[0, 0, 0]} rotation={[0, 0, 0]}>
-        <torusGeometry args={[0.16, 0.04, 32, 64, Math.PI * 1.2]} />
+        {/* Use elliptical curve for bean shape */}
+        <torusGeometry args={[0.16, 0.025, 32, 64, Math.PI * 1.35]} />
         <meshPhysicalMaterial
           color={frameColor}
           metalness={0.9}
@@ -70,48 +70,43 @@ const VisionProGlassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal =
         />
       </mesh>
       
-      {/* Bridge (nose piece) - more substantial and integrated */}
-      <mesh castShadow receiveShadow position={[0, 0, 0.04]} material={frameMaterial}>
-        <boxGeometry args={[0.04, 0.02, 0.06]} />
+      {/* Bridge (nose piece) - thinner for aviator style */}
+      <mesh castShadow receiveShadow position={[0, 0, 0.02]} material={frameMaterial}>
+        <boxGeometry args={[0.03, 0.01, 0.04]} />
       </mesh>
       
-      {/* Left Lens - oversized rectangular with rounded corners */}
-      <mesh position={[-0.08, 0, 0.02]} rotation={[0, 0.1, 0]} material={lensMaterial}>
-        <cylinderGeometry args={[0.08, 0.08, 0.01, 8, 1, false, Math.PI/8, Math.PI * 1.75]} />
+      {/* Left Lens - aviator teardrop shape */}
+      <mesh position={[-0.08, 0, 0.01]} rotation={[0, 0.1, 0]} material={lensMaterial}>
+        <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        <mesh scale={[1, 0.6, 1]} position={[0, -0.03, 0]}>
+          <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        </mesh>
       </mesh>
       
-      {/* Right Lens - oversized rectangular with rounded corners */}
-      <mesh position={[0.08, 0, 0.02]} rotation={[0, -0.1, 0]} material={lensMaterial}>
-        <cylinderGeometry args={[0.08, 0.08, 0.01, 8, 1, false, Math.PI/8, Math.PI * 1.75]} />
+      {/* Right Lens - aviator teardrop shape */}
+      <mesh position={[0.08, 0, 0.01]} rotation={[0, -0.1, 0]} material={lensMaterial}>
+        <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        <mesh scale={[1, 0.6, 1]} position={[0, -0.03, 0]}>
+          <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        </mesh>
       </mesh>
       
-      {/* Left Temple (arm) - smoother integration */}
-      <mesh castShadow receiveShadow position={[-0.16, 0, -0.01]} rotation={[0, 0.3, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.16, 0.02, 0.02]} />
+      {/* Left Temple (arm) - slimmer for sunglasses */}
+      <mesh castShadow receiveShadow position={[-0.17, 0, -0.01]} rotation={[0, 0.3, 0]} material={frameMaterial}>
+        <boxGeometry args={[0.18, 0.015, 0.015]} />
       </mesh>
       
-      {/* Right Temple (arm) - smoother integration */}
-      <mesh castShadow receiveShadow position={[0.16, 0, -0.01]} rotation={[0, -0.3, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.16, 0.02, 0.02]} />
+      {/* Right Temple (arm) - slimmer for sunglasses */}
+      <mesh castShadow receiveShadow position={[0.17, 0, -0.01]} rotation={[0, -0.3, 0]} material={frameMaterial}>
+        <boxGeometry args={[0.18, 0.015, 0.015]} />
       </mesh>
       
-      {/* Digital Crown (Apple's signature detail) */}
-      <mesh castShadow receiveShadow position={[0.16, 0.04, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
-        <cylinderGeometry args={[0.01, 0.01, 0.015, 16]} />
+      {/* Temple hinges */}
+      <mesh castShadow receiveShadow position={[-0.16, 0, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
+        <cylinderGeometry args={[0.006, 0.006, 0.01, 16]} />
       </mesh>
-      
-      {/* Face sensors / cameras (Vision Pro-like) */}
-      <mesh castShadow receiveShadow position={[-0.05, 0.04, 0.03]} material={frameMaterial}>
-        <sphereGeometry args={[0.005, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0.05, 0.04, 0.03]} material={frameMaterial}>
-        <sphereGeometry args={[0.005, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[-0.09, 0.02, 0.03]} material={frameMaterial}>
-        <sphereGeometry args={[0.005, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0.09, 0.02, 0.03]} material={frameMaterial}>
-        <sphereGeometry args={[0.005, 16, 16]} />
+      <mesh castShadow receiveShadow position={[0.16, 0, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
+        <cylinderGeometry args={[0.006, 0.006, 0.01, 16]} />
       </mesh>
     </group>
   );
@@ -152,7 +147,7 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
         <DialogHeader>
           <DialogTitle className="text-2xl text-white">Customize Your LuminX</DialogTitle>
           <DialogDescription className="text-white/70">
-            Design your perfect Apple Vision Pro-inspired LuminX glasses
+            Design your perfect aviator-style LuminX sunglasses
           </DialogDescription>
         </DialogHeader>
         
@@ -173,7 +168,7 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
                 resolution={256} 
                 color="#000000" 
               />
-              <VisionProGlassesModel 
+              <SunglassesModel 
                 frameColor={selectedFrameColor} 
                 lensColor={selectedLensColor} 
                 lensOpacity={selectedLensOpacity}

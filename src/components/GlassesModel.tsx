@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { 
@@ -52,23 +51,22 @@ const useSpring = (initialValue = 0, dampingFactor = 0.05, precision = 0.001) =>
   return [value, setTarget] as const;
 };
 
-// Enhanced material creation with Apple-style PBR properties
+// Enhanced material creation with sunglasses-style PBR properties
 const createGlassesMaterials = (isHovered = false) => {
-  // Frame material with subsurface scattering for plastic-like appearance
+  // Frame material with matte and metallic finish for sunglasses
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('#1d1d1f'),
-    metalness: 0.2,
+    metalness: 0.5,
     roughness: 0.2,
-    clearcoat: 1.0,
+    clearcoat: 0.8,
     clearcoatRoughness: 0.1,
-    reflectivity: 0.5,
-    ior: 1.5, // Higher IOR for premium plastic look
+    reflectivity: 0.7,
+    ior: 1.5,
     transmission: 0.0,
     thickness: 1.0,
     envMapIntensity: 1.0,
     specularIntensity: 1.0,
     specularColor: new THREE.Color('#ffffff'),
-    // Subsurface scattering for premium plastic look
     attenuationDistance: 0.5,
     attenuationColor: new THREE.Color('#111111'),
   });
@@ -82,21 +80,21 @@ const createGlassesMaterials = (isHovered = false) => {
     clearcoatRoughness: 0.2,
     reflectivity: 1.0,
     envMapIntensity: 1.5,
-    anisotropy: 0.5, // Anisotropic reflections
+    anisotropy: 0.5,
     anisotropyRotation: Math.PI / 4,
   });
 
-  // Lens material with high-quality glass simulation
+  // Lens material with dark tint for sunglasses
   const lensMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#444444'),
-    metalness: 0.0,
+    color: new THREE.Color('#333333'),
+    metalness: 0.2,
     roughness: 0.05,
-    transmission: 0.98, // High transmission for glass
+    transmission: 0.7, 
     thickness: 0.5,
-    envMapIntensity: 1.0,
-    ior: 1.5, // Glass IOR
+    envMapIntensity: 1.5,
+    ior: 1.5,
     transparent: true,
-    opacity: 0.2,
+    opacity: 0.6,
     depthWrite: false,
   });
 
@@ -110,8 +108,8 @@ const createGlassesMaterials = (isHovered = false) => {
   return { frameMaterial, metalMaterial, lensMaterial, displayMaterial };
 };
 
-// Apple-style realistic glasses model
-const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
+// Sunglasses-style model (bean/aviator shape)
+const RealisticSunglasses = ({ scrollProgress = 0, isHovered = false }) => {
   // Add proper type annotation for the refs
   const groupRef = useRef<THREE.Group>(null);
   const frameRef = useRef<THREE.Mesh>(null);
@@ -122,14 +120,14 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
   // Materials with PBR properties
   const { frameMaterial, metalMaterial, lensMaterial, displayMaterial } = createGlassesMaterials(isHovered);
   
-  // Normal map for micro-scratches - Updated path to use the correct folder
+  // Normal map for micro-scratches
   const normalMap = useTexture('/images/micro_scratches_normal.jpg');
   
   // Apply normal map to frame material
   useEffect(() => {
     if (normalMap) {
       frameMaterial.normalMap = normalMap;
-      frameMaterial.normalScale.set(0.05, 0.05); // 0.5% intensity as requested
+      frameMaterial.normalScale.set(0.05, 0.05);
     }
   }, [normalMap]);
   
@@ -178,59 +176,52 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
 
   return (
     <group ref={groupRef}>
-      {/* Frame Base with enhanced geometry for more realistic appearance */}
-      <mesh castShadow receiveShadow material={frameMaterial}>
-        <boxGeometry args={[0.16, 0.04, 0.04]} />
-        <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-          <boxGeometry args={[0.16, 0.04, 0.01]} />
+      {/* Frame Base - bean/aviator shape */}
+      <mesh castShadow receiveShadow position={[0, 0, 0]} rotation={[0, 0, 0]} material={frameMaterial}>
+        <torusGeometry args={[0.15, 0.02, 32, 64, Math.PI * 1.35]} />
+      </mesh>
+      
+      {/* Frame Bridge - slimmer for sunglasses */}
+      <mesh castShadow receiveShadow position={[0, 0, 0.02]} material={frameMaterial}>
+        <boxGeometry args={[0.03, 0.01, 0.03]} />
+      </mesh>
+
+      {/* Left Eye Lens - teardrop/aviator shape */}
+      <mesh position={[-0.08, 0, 0.01]} material={lensMaterial}>
+        <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        <mesh scale={[1, 0.6, 1]} position={[0, -0.03, 0]}>
+          <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
         </mesh>
       </mesh>
       
-      {/* Frame Bridge with improved geometry */}
-      <mesh castShadow receiveShadow position={[0, 0, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.03, 0.02, 0.005]} />
-      </mesh>
-
-      {/* Left Eye Frame - enhanced with torus knot for more elegant curves */}
-      <mesh castShadow receiveShadow position={[-0.08, 0, 0.02]} material={frameMaterial}>
-        <torusGeometry args={[0.07, 0.01, 32, 100]} />
+      {/* Right Eye Lens */}
+      <mesh position={[0.08, 0, 0.01]} material={lensMaterial}>
+        <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        <mesh scale={[1, 0.6, 1]} position={[0, -0.03, 0]}>
+          <sphereGeometry args={[0.09, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        </mesh>
       </mesh>
       
-      {/* Right Eye Frame */}
-      <mesh castShadow receiveShadow position={[0.08, 0, 0.02]} material={frameMaterial}>
-        <torusGeometry args={[0.07, 0.01, 32, 100]} />
-      </mesh>
-      
-      {/* Left Lens with improved glass material */}
-      <mesh position={[-0.08, 0, 0.015]} material={lensMaterial}>
-        <circleGeometry args={[0.065, 64]} />
-      </mesh>
-      
-      {/* Right Lens */}
-      <mesh position={[0.08, 0, 0.015]} material={lensMaterial}>
-        <circleGeometry args={[0.065, 64]} />
-      </mesh>
-      
-      {/* Left Temple with metal hinges */}
-      <group position={[-0.14, 0, -0.01]} rotation={[0, 0.3, 0]}>
+      {/* Left Temple - slimmer for sunglasses */}
+      <group position={[-0.15, 0, -0.01]} rotation={[0, 0.3, 0]}>
         <mesh castShadow receiveShadow material={frameMaterial}>
-          <boxGeometry args={[0.15, 0.006, 0.004]} />
+          <boxGeometry args={[0.18, 0.015, 0.015]} />
         </mesh>
         {/* Metal hinge */}
         <mesh castShadow receiveShadow position={[0, 0, 0.002]} material={metalMaterial}>
-          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} />
+          <cylinderGeometry args={[0.006, 0.006, 0.01, 16]} />
           <mesh rotation={[Math.PI / 2, 0, 0]} />
         </mesh>
       </group>
       
       {/* Right Temple */}
-      <group position={[0.14, 0, -0.01]} rotation={[0, -0.3, 0]}>
+      <group position={[0.15, 0, -0.01]} rotation={[0, -0.3, 0]}>
         <mesh castShadow receiveShadow material={frameMaterial}>
-          <boxGeometry args={[0.15, 0.006, 0.004]} />
+          <boxGeometry args={[0.18, 0.015, 0.015]} />
         </mesh>
         {/* Metal hinge */}
         <mesh castShadow receiveShadow position={[0, 0, 0.002]} material={metalMaterial}>
-          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} />
+          <cylinderGeometry args={[0.006, 0.006, 0.01, 16]} />
           <mesh rotation={[Math.PI / 2, 0, 0]} />
         </mesh>
       </group>
@@ -342,8 +333,8 @@ const GlassesModelScene = ({ scrollProgress = 0 }) => {
           color="#000000" 
         />
         
-        {/* The enhanced glasses model */}
-        <RealisticGlasses scrollProgress={scrollProgress} isHovered={isHovered} />
+        {/* The enhanced sunglasses model */}
+        <RealisticSunglasses scrollProgress={scrollProgress} isHovered={isHovered} />
         
         {/* High-quality HDRI environment for realistic reflections */}
         <Environment preset="studio" background={false} />
