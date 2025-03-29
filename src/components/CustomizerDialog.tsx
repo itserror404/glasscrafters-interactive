@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -6,33 +7,33 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment, ContactShadows, Html, BakeShadows } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Colors for customization (modern, monochrome palette)
+// Colors for customization (Apple Vision Pro inspired palette)
 const frameColors = [
+  { name: 'Space Gray', value: '#1d1d1f' },
+  { name: 'Silver', value: '#86868b' },
+  { name: 'Graphite', value: '#2d2d2d' },
   { name: 'Matte Black', value: '#000000' },
-  { name: 'Glossy Black', value: '#222222' },
-  { name: 'Dark Gray', value: '#333333' },
-  { name: 'Silver', value: '#999999' },
-  { name: 'White', value: '#FFFFFF' },
+  { name: 'Polished Silver', value: '#e3e3e3' },
 ];
 
 const lensColors = [
-  { name: 'Clear', value: '#CCCCCC', opacity: 0.2 },
-  { name: 'Light Gray', value: '#666666', opacity: 0.3 },
+  { name: 'Clear', value: '#cccccc', opacity: 0.2 },
+  { name: 'Light Blue', value: '#2997ff', opacity: 0.3 },
   { name: 'Dark Gray', value: '#333333', opacity: 0.5 },
   { name: 'Black', value: '#000000', opacity: 0.7 },
   { name: 'Mirrored', value: '#FFFFFF', opacity: 0.3, metalness: 1.0 },
 ];
 
-// Realistic customizable glasses model
-const CustomizableGlasses = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
-  // Add proper type annotation for the ref
+// Apple Vision Pro inspired model
+const VisionProModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
   const groupRef = useRef<THREE.Group>(null);
   
+  // Apple-like premium materials
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(frameColor),
-    metalness: frameColor === '#999999' ? 0.9 : 0.6,
-    roughness: frameColor === '#222222' ? 0.1 : 0.5,
-    clearcoat: frameColor === '#222222' ? 1.0 : 0.0,
+    metalness: frameColor === '#86868b' ? 0.8 : 0.4,
+    roughness: 0.2,
+    clearcoat: 1.0,
     clearcoatRoughness: 0.1,
   });
 
@@ -44,6 +45,12 @@ const CustomizableGlasses = ({ frameColor, lensColor, lensOpacity, lensMetal = 0
     transparent: true,
     opacity: lensOpacity,
   });
+
+  const bandMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color("#444"),
+    roughness: 0.5,
+    metalness: 0.1,
+  });
   
   useFrame(() => {
     if (groupRef.current) {
@@ -53,54 +60,54 @@ const CustomizableGlasses = ({ frameColor, lensColor, lensOpacity, lensMetal = 0
   });
 
   return (
-    <group ref={groupRef}>
-      {/* Frame Base */}
-      <mesh castShadow receiveShadow material={frameMaterial}>
-        <boxGeometry args={[0.16, 0.04, 0.04]} />
-        <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-          <boxGeometry args={[0.16, 0.04, 0.01]} />
-        </mesh>
+    <group ref={groupRef} scale={[1.2, 1.2, 1.2]}>
+      {/* Main headset body - curved like Vision Pro */}
+      <mesh castShadow receiveShadow material={frameMaterial} position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.12, 0.12, 0.07, 32, 1, true]} />
       </mesh>
       
-      {/* Frame Bridge */}
-      <mesh castShadow receiveShadow position={[0, 0, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.03, 0.02, 0.005]} />
-      </mesh>
-
-      {/* Left Eye Frame */}
-      <mesh castShadow receiveShadow position={[-0.08, 0, 0.02]} material={frameMaterial}>
-        <torusGeometry args={[0.07, 0.01, 16, 100]} />
+      {/* Front face cover */}
+      <mesh castShadow receiveShadow position={[0, 0, 0.035]} material={frameMaterial}>
+        <cylinderGeometry args={[0.12, 0.12, 0.005, 32]} />
       </mesh>
       
-      {/* Right Eye Frame */}
-      <mesh castShadow receiveShadow position={[0.08, 0, 0.02]} material={frameMaterial}>
-        <torusGeometry args={[0.07, 0.01, 16, 100]} />
+      {/* Back cushion (simulated) */}
+      <mesh castShadow receiveShadow position={[0, 0, -0.035]} material={bandMaterial}>
+        <cylinderGeometry args={[0.12, 0.12, 0.005, 32]} />
       </mesh>
       
-      {/* Left Lens */}
-      <mesh position={[-0.08, 0, 0.015]} material={lensMaterial}>
-        <circleGeometry args={[0.065, 32]} />
+      {/* Left Eye Lens */}
+      <mesh position={[-0.04, 0, 0.035]} rotation={[0, 0, 0]} material={lensMaterial}>
+        <circleGeometry args={[0.035, 32]} />
       </mesh>
       
-      {/* Right Lens */}
-      <mesh position={[0.08, 0, 0.015]} material={lensMaterial}>
-        <circleGeometry args={[0.065, 32]} />
+      {/* Right Eye Lens */}
+      <mesh position={[0.04, 0, 0.035]} rotation={[0, 0, 0]} material={lensMaterial}>
+        <circleGeometry args={[0.035, 32]} />
       </mesh>
       
-      {/* Left Temple */}
-      <mesh castShadow receiveShadow position={[-0.14, 0, -0.01]} rotation={[0, 0.3, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.15, 0.006, 0.004]} />
+      {/* Head strap - top */}
+      <mesh castShadow receiveShadow position={[0, 0.07, 0]} rotation={[Math.PI/2, 0, 0]} material={bandMaterial}>
+        <torusGeometry args={[0.1, 0.01, 16, 32, Math.PI]} />
       </mesh>
       
-      {/* Right Temple */}
-      <mesh castShadow receiveShadow position={[0.14, 0, -0.01]} rotation={[0, -0.3, 0]} material={frameMaterial}>
-        <boxGeometry args={[0.15, 0.006, 0.004]} />
+      {/* External cameras (Vision Pro-like) */}
+      <mesh castShadow receiveShadow position={[-0.09, 0.02, 0.035]} material={frameMaterial}>
+        <sphereGeometry args={[0.008, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[0.09, 0.02, 0.035]} material={frameMaterial}>
+        <sphereGeometry args={[0.008, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[-0.09, -0.02, 0.035]} material={frameMaterial}>
+        <sphereGeometry args={[0.008, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[0.09, -0.02, 0.035]} material={frameMaterial}>
+        <sphereGeometry args={[0.008, 16, 16]} />
       </mesh>
       
-      {/* AR Display (subtle) */}
-      <mesh position={[0, 0.05, 0.1]} rotation={[0, 0, 0]}>
-        <planeGeometry args={[0.2, 0.05]} />
-        <meshBasicMaterial color={0xFFFFFF} transparent opacity={0.05} />
+      {/* Digital Crown (Apple's signature control) */}
+      <mesh castShadow receiveShadow position={[0.12, 0.03, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
+        <cylinderGeometry args={[0.008, 0.008, 0.01, 16]} />
       </mesh>
     </group>
   );
@@ -122,9 +129,9 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-black text-white border-gray-800 max-w-4xl w-[90vw]">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-white">Customize Your Glasses</DialogTitle>
+          <DialogTitle className="text-2xl text-white">Customize Your LuminX</DialogTitle>
           <DialogDescription className="text-white/70">
-            Choose your perfect style combinations
+            Design your perfect Apple Vision Pro-inspired LuminX
           </DialogDescription>
         </DialogHeader>
         
@@ -145,7 +152,7 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
                 resolution={256} 
                 color="#000000" 
               />
-              <CustomizableGlasses 
+              <VisionProModel 
                 frameColor={selectedFrameColor} 
                 lensColor={selectedLensColor} 
                 lensOpacity={selectedLensOpacity}
@@ -170,7 +177,7 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
             <Tabs defaultValue="frame">
               <TabsList className="w-full bg-black border border-white/10">
                 <TabsTrigger value="frame" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Frame</TabsTrigger>
-                <TabsTrigger value="lens" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Lenses</TabsTrigger>
+                <TabsTrigger value="lens" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Display</TabsTrigger>
                 <TabsTrigger value="features" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Features</TabsTrigger>
               </TabsList>
               
@@ -192,7 +199,7 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
               
               {/* Lens Colors */}
               <TabsContent value="lens" className="space-y-4 mt-4">
-                <h4 className="font-medium text-white/80">Lens Tint</h4>
+                <h4 className="font-medium text-white/80">Display Tint</h4>
                 <div className="grid grid-cols-5 gap-2">
                   {lensColors.map((color) => (
                     <button
@@ -225,6 +232,10 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
                   <div className="flex items-center space-x-2">
                     <input type="checkbox" id="audio" className="rounded text-white bg-black border-white/30" defaultChecked />
                     <label htmlFor="audio" className="text-white/80">Spatial Audio</label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="eyetracking" className="rounded text-white bg-black border-white/30" defaultChecked />
+                    <label htmlFor="eyetracking" className="text-white/80">Eye Tracking</label>
                   </div>
                 </div>
               </TabsContent>

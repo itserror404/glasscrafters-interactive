@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Circle } from 'lucide-react';
@@ -149,19 +148,6 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div
-            custom={1}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 tracking-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
-                LuminX
-              </span>
-            </h1>
-          </motion.div>
-
-          <motion.div
             custom={2}
             variants={fadeUpVariants}
             initial="hidden"
@@ -174,7 +160,7 @@ const HeroSection = () => {
             </p>
           </motion.div>
           
-          {/* AR Glasses Image - Moved above buttons */}
+          {/* AR Glasses Image - Above buttons */}
           <motion.div 
             custom={3}
             variants={fadeUpVariants}
