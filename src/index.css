@@ -1,4 +1,7 @@
 
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,8 +62,9 @@
 
   body {
     @apply bg-black text-white;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -102,6 +106,12 @@
     @apply flex items-center justify-center;
   }
   
+  /* Apple system fonts */
+  .font-sf-pro {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.025em;
+  }
+  
   /* Apple-style animations */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -128,5 +138,63 @@
   
   .staggered-item:nth-child(3) {
     animation: staggered-appear 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  }
+  
+  /* Apple-style curved text for hero */
+  .curved-text {
+    position: relative;
+    display: inline-block;
+    transform-style: preserve-3d;
+    perspective: 500px;
+  }
+  
+  .curved-text span {
+    display: inline-block;
+    transform: rotateY(var(--rotate)) translateZ(20px);
+    opacity: calc(1 - (var(--abs-rotate) * 0.01));
+    filter: blur(calc(var(--abs-rotate) * 0.05px));
+    transition: all 0.3s ease;
+  }
+  
+  /* Apple-style navigation */
+  .apple-nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .apple-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  
+  .apple-nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  /* Apple-style buttons */
+  .apple-button {
+    @apply bg-[#2997ff] hover:bg-[#2997ff]/90 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 ease-out;
+    box-shadow: 0 0 0 0 rgba(41, 151, 255, 0.5);
+  }
+  
+  .apple-button:hover {
+    box-shadow: 0 0 0 6px rgba(41, 151, 255, 0.2);
+  }
+  
+  .apple-button-secondary {
+    @apply bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 ease-out;
+  }
+  
+  .apple-button-secondary:hover {
+    @apply border-white/40;
   }
 }

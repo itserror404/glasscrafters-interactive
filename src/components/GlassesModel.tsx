@@ -49,7 +49,7 @@ const useSpring = (initialValue = 0, dampingFactor = 0.05, precision = 0.001) =>
     setValue(value + velocity.current);
   });
 
-  return [value, setTarget];
+  return [value, setTarget] as const;
 };
 
 // Enhanced material creation with Apple-style PBR properties
@@ -145,7 +145,7 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
     if (Math.abs(targetRotation - rotationY) > 0.1) {
       sounds.tick.play();
     }
-  }, [scrollProgress]);
+  }, [scrollProgress, rotationY]);
   
   // Play hover sound effect
   useEffect(() => {
@@ -218,7 +218,8 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
         </mesh>
         {/* Metal hinge */}
         <mesh castShadow receiveShadow position={[0, 0, 0.002]} material={metalMaterial}>
-          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} rotation={[Math.PI / 2, 0, 0]} />
+          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} />
+          <mesh rotation={[Math.PI / 2, 0, 0]} />
         </mesh>
       </group>
       
@@ -229,7 +230,8 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
         </mesh>
         {/* Metal hinge */}
         <mesh castShadow receiveShadow position={[0, 0, 0.002]} material={metalMaterial}>
-          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} rotation={[Math.PI / 2, 0, 0]} />
+          <cylinderGeometry args={[0.004, 0.004, 0.01, 16]} />
+          <mesh rotation={[Math.PI / 2, 0, 0]} />
         </mesh>
       </group>
       
