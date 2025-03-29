@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -154,7 +153,7 @@ const TechnicalDetails = () => {
           description="Near-zero latency for seamless real-time interactions"
         />
       </motion.div>
-    </motion.div>
+    </section>
   );
 };
 
