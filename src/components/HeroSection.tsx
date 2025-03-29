@@ -120,7 +120,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f] via-black to-[#1d1d1f] z-0"></div>
       
       {/* Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 rounded-bean overflow-hidden">
         <AviatorBeanShape
           delay={0.3}
           width={600}

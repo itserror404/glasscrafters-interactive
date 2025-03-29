@@ -18,6 +18,15 @@ const config = {
         "2xl": "1400px",
       },
     },
+
+    borderRadius: {
+      lg: "var(--radius)",
+      md: "calc(var(--radius) - 2px)",
+      sm: "calc(var(--radius) - 4px)",
+      bean: "60% 40% 60% 40% / 50% 50% 50% 50%", // Add bean shape here
+    },
+
+    
     extend: {
       colors: {
         border: "hsl(var(--border))",
