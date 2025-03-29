@@ -199,7 +199,7 @@ const HeroSection = () => {
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
               alt="LuminX AR Glasses" 
-              className="max-w-full max-h-full object-contain"
+              className="object-contain  w-[600px] md:w-[800px] h-[500px] md:h-[700px] "
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ 
