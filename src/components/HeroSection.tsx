@@ -224,7 +224,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-0"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-12"
           >
             <Button 
               className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
