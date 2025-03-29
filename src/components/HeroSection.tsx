@@ -165,7 +165,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3 md:mb-4"
           >
             <Circle className="h-2 w-2 fill-[#2997ff]/80" />
             <span className="text-sm text-white/60 tracking-wide">
@@ -178,27 +178,35 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
+            className="mb-2" // Reduced spacing here
           >
-            <p className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
+            <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
               <br />
               Experience Tomorrow, Today.
             </p>
           </motion.div>
           
-          {/* AR Glasses Image - Interactive with cursor */}
+          {/* AR Glasses Image - Interactive with cursor and growing animation */}
           <motion.div 
             ref={containerRef}
             custom={3}
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[360px] md:h-[500px] flex items-center justify-center mb-8 perspective-1000 cursor-pointer"
+            className="h-[400px] md:h-[550px] flex items-center justify-center mb-4 perspective-1000 cursor-pointer"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
               alt="LuminX AR Glasses" 
               className="max-w-full max-h-full object-contain"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ 
+                duration: 1.2, 
+                delay: 0.8,
+                ease: [0.25, 0.4, 0.25, 1]
+              }}
               style={{
                 rotateY,
                 rotateX,
@@ -216,7 +224,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-0"
           >
             <Button 
               className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
@@ -238,7 +246,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mt-12"
+            className="mt-8"
           >
             <CountdownTimer />
           </motion.div>
