@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				glasscraft: {
+					'dark': '#171717',
+					'blue': '#0EA5E9',
+					'purple': '#9B87F5',
+					'light-purple': '#E5DEFF',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +91,32 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
+				'pulse-light': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' },
+				},
+				'spin-slow': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
+				},
+				'countdown': {
+					'0%': { transform: 'scaleY(1)' },
+					'50%': { transform: 'scaleY(0.8)' },
+					'100%': { transform: 'scaleY(1)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-light': 'pulse-light 3s ease-in-out infinite',
+				'spin-slow': 'spin-slow 20s linear infinite',
+				'countdown': 'countdown 1s ease-in-out infinite',
 			}
 		}
 	},
