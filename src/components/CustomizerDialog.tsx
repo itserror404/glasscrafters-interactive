@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, Environment, ContactShadows, Html, BakeShadows } from '@react-three/drei';
 import * as THREE from 'three';
@@ -10,10 +11,10 @@ import * as THREE from 'three';
 // Colors for customization (Apple Vision Pro inspired palette)
 const frameColors = [
   { name: 'Space Gray', value: '#1d1d1f' },
+  { name: 'Titanium', value: '#D4D4D2' },
+  { name: 'Midnight', value: '#1F1F1F' },
   { name: 'Silver', value: '#86868b' },
   { name: 'Graphite', value: '#2d2d2d' },
-  { name: 'Matte Black', value: '#000000' },
-  { name: 'Polished Silver', value: '#e3e3e3' },
 ];
 
 const lensColors = [
@@ -25,31 +26,26 @@ const lensColors = [
 ];
 
 // Apple Vision Pro inspired model
-const VisionProModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
+const VisionProGlassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
   const groupRef = useRef<THREE.Group>(null);
   
   // Apple-like premium materials
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(frameColor),
-    metalness: frameColor === '#86868b' ? 0.8 : 0.4,
-    roughness: 0.2,
+    metalness: 0.9,
+    roughness: 0.15,
     clearcoat: 1.0,
     clearcoatRoughness: 0.1,
+    sheen: 0.4,
   });
 
   const lensMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(lensColor),
     metalness: lensMetal,
     roughness: 0.1,
-    transmission: 0.9,
+    transmission: 0.95,
     transparent: true,
     opacity: lensOpacity,
-  });
-
-  const bandMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color("#444"),
-    roughness: 0.5,
-    metalness: 0.1,
   });
   
   useFrame(() => {
@@ -60,54 +56,60 @@ const VisionProModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) =
   });
 
   return (
-    <group ref={groupRef} scale={[1.2, 1.2, 1.2]}>
-      {/* Main headset body - curved like Vision Pro */}
-      <mesh castShadow receiveShadow material={frameMaterial} position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.12, 0.12, 0.07, 32, 1, true]} />
+    <group ref={groupRef} scale={[1.2, 1.2, 1.2]} rotation={[0, 0, 0]}>
+      {/* Main frame - curved like Vision Pro */}
+      <mesh castShadow receiveShadow material={frameMaterial}>
+        <torusGeometry args={[0.14, 0.03, 16, 32, Math.PI * 1.15]} />
+        <meshPhysicalMaterial
+          color={frameColor}
+          metalness={0.9}
+          roughness={0.15}
+          clearcoat={1.0}
+        />
       </mesh>
       
-      {/* Front face cover */}
-      <mesh castShadow receiveShadow position={[0, 0, 0.035]} material={frameMaterial}>
-        <cylinderGeometry args={[0.12, 0.12, 0.005, 32]} />
+      {/* Bridge (nose piece) */}
+      <mesh castShadow receiveShadow position={[0, 0, 0.04]} material={frameMaterial}>
+        <boxGeometry args={[0.03, 0.02, 0.06]} />
       </mesh>
       
-      {/* Back cushion (simulated) */}
-      <mesh castShadow receiveShadow position={[0, 0, -0.035]} material={bandMaterial}>
-        <cylinderGeometry args={[0.12, 0.12, 0.005, 32]} />
+      {/* Left Lens (rounded rectangle shape) */}
+      <mesh position={[-0.07, 0, 0.02]} rotation={[0, 0.1, 0]} material={lensMaterial}>
+        <cylinderGeometry args={[0.06, 0.06, 0.01, 32, 1, false, 0, Math.PI * 2]} />
       </mesh>
       
-      {/* Left Eye Lens */}
-      <mesh position={[-0.04, 0, 0.035]} rotation={[0, 0, 0]} material={lensMaterial}>
-        <circleGeometry args={[0.035, 32]} />
+      {/* Right Lens (rounded rectangle shape) */}
+      <mesh position={[0.07, 0, 0.02]} rotation={[0, -0.1, 0]} material={lensMaterial}>
+        <cylinderGeometry args={[0.06, 0.06, 0.01, 32, 1, false, 0, Math.PI * 2]} />
       </mesh>
       
-      {/* Right Eye Lens */}
-      <mesh position={[0.04, 0, 0.035]} rotation={[0, 0, 0]} material={lensMaterial}>
-        <circleGeometry args={[0.035, 32]} />
+      {/* Left Temple (arm) */}
+      <mesh castShadow receiveShadow position={[-0.14, 0, -0.01]} rotation={[0, 0, 0]} material={frameMaterial}>
+        <boxGeometry args={[0.02, 0.015, 0.2]} />
       </mesh>
       
-      {/* Head strap - top */}
-      <mesh castShadow receiveShadow position={[0, 0.07, 0]} rotation={[Math.PI/2, 0, 0]} material={bandMaterial}>
-        <torusGeometry args={[0.1, 0.01, 16, 32, Math.PI]} />
+      {/* Right Temple (arm) */}
+      <mesh castShadow receiveShadow position={[0.14, 0, -0.01]} rotation={[0, 0, 0]} material={frameMaterial}>
+        <boxGeometry args={[0.02, 0.015, 0.2]} />
       </mesh>
       
-      {/* External cameras (Vision Pro-like) */}
-      <mesh castShadow receiveShadow position={[-0.09, 0.02, 0.035]} material={frameMaterial}>
-        <sphereGeometry args={[0.008, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0.09, 0.02, 0.035]} material={frameMaterial}>
-        <sphereGeometry args={[0.008, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[-0.09, -0.02, 0.035]} material={frameMaterial}>
-        <sphereGeometry args={[0.008, 16, 16]} />
-      </mesh>
-      <mesh castShadow receiveShadow position={[0.09, -0.02, 0.035]} material={frameMaterial}>
-        <sphereGeometry args={[0.008, 16, 16]} />
+      {/* Crown control (Apple's signature detail) */}
+      <mesh castShadow receiveShadow position={[0.14, 0.04, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
+        <cylinderGeometry args={[0.01, 0.01, 0.012, 16]} />
       </mesh>
       
-      {/* Digital Crown (Apple's signature control) */}
-      <mesh castShadow receiveShadow position={[0.12, 0.03, 0]} rotation={[0, 0, Math.PI/2]} material={new THREE.MeshStandardMaterial({ color: '#86868b', metalness: 0.9, roughness: 0.1 })}>
-        <cylinderGeometry args={[0.008, 0.008, 0.01, 16]} />
+      {/* Face sensors / cameras (Vision Pro-like) */}
+      <mesh castShadow receiveShadow position={[-0.05, 0.04, 0.03]} material={frameMaterial}>
+        <sphereGeometry args={[0.005, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[0.05, 0.04, 0.03]} material={frameMaterial}>
+        <sphereGeometry args={[0.005, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[-0.09, 0.01, 0.03]} material={frameMaterial}>
+        <sphereGeometry args={[0.005, 16, 16]} />
+      </mesh>
+      <mesh castShadow receiveShadow position={[0.09, 0.01, 0.03]} material={frameMaterial}>
+        <sphereGeometry args={[0.005, 16, 16]} />
       </mesh>
     </group>
   );
@@ -123,11 +125,23 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
   const [selectedLensColor, setSelectedLensColor] = useState(lensColors[0].value);
   const [selectedLensOpacity, setSelectedLensOpacity] = useState(lensColors[0].opacity);
   const [selectedLensMetal, setSelectedLensMetal] = useState(0);
+  const [faceMappingEnabled, setFaceMappingEnabled] = useState(false);
+  const [tintLevel, setTintLevel] = useState(50);
 
   const handleLensColorChange = (color: string, opacity: number, metalness = 0) => {
     setSelectedLensColor(color);
     setSelectedLensOpacity(opacity);
     setSelectedLensMetal(metalness);
+  };
+
+  const handleTintChange = (value: number[]) => {
+    const tint = value[0];
+    setTintLevel(tint);
+    setSelectedLensOpacity(tint / 100);
+  };
+
+  const toggleFaceMapping = () => {
+    setFaceMappingEnabled(!faceMappingEnabled);
   };
 
   return (
@@ -136,13 +150,13 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
         <DialogHeader>
           <DialogTitle className="text-2xl text-white">Customize Your LuminX</DialogTitle>
           <DialogDescription className="text-white/70">
-            Design your perfect Apple Vision Pro-inspired LuminX
+            Design your perfect Apple Vision Pro-inspired LuminX glasses
           </DialogDescription>
         </DialogHeader>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* 3D Preview */}
-          <div className="h-[300px] md:h-[400px] bg-black/50 border border-white/10 rounded-lg">
+          <div className="h-[300px] md:h-[400px] bg-black/50 border border-white/10 rounded-lg relative">
             <Canvas shadows dpr={[1, 2]}>
               <color attach="background" args={['#050505']} />
               <PerspectiveCamera makeDefault position={[0, 0, 0.7]} />
@@ -157,7 +171,7 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
                 resolution={256} 
                 color="#000000" 
               />
-              <VisionProModel 
+              <VisionProGlassesModel 
                 frameColor={selectedFrameColor} 
                 lensColor={selectedLensColor} 
                 lensOpacity={selectedLensOpacity}
@@ -175,6 +189,18 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
                 maxPolarAngle={Math.PI / 2 + 0.3}
               />
             </Canvas>
+            
+            {/* Face mapping overlay */}
+            {faceMappingEnabled && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70">
+                <div className="grid grid-cols-10 gap-4 w-full h-full opacity-30">
+                  {[...Array(100)].map((_, i) => (
+                    <div key={i} className="w-2 h-2 rounded-full bg-white"></div>
+                  ))}
+                </div>
+                <p className="text-white/90 absolute bottom-10">Align glasses with your face</p>
+              </div>
+            )}
           </div>
           
           {/* Customization Controls */}
@@ -182,7 +208,7 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
             <Tabs defaultValue="frame">
               <TabsList className="w-full bg-black border border-white/10">
                 <TabsTrigger value="frame" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Frame</TabsTrigger>
-                <TabsTrigger value="lens" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Display</TabsTrigger>
+                <TabsTrigger value="lens" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Lenses</TabsTrigger>
                 <TabsTrigger value="features" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-black">Features</TabsTrigger>
               </TabsList>
               
@@ -204,7 +230,7 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
               
               {/* Lens Colors */}
               <TabsContent value="lens" className="space-y-4 mt-4">
-                <h4 className="font-medium text-white/80">Display Tint</h4>
+                <h4 className="font-medium text-white/80">Lens Color</h4>
                 <div className="grid grid-cols-5 gap-2">
                   {lensColors.map((color) => (
                     <button
@@ -215,6 +241,22 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
                       title={color.name}
                     />
                   ))}
+                </div>
+                
+                <div className="mt-6">
+                  <h4 className="font-medium text-white/80 mb-3">Lens Tint Level</h4>
+                  <Slider
+                    defaultValue={[50]}
+                    max={100}
+                    step={1}
+                    value={[tintLevel]}
+                    onValueChange={handleTintChange}
+                    className="[&>.cursor-pointer]:bg-[#2997ff]"
+                  />
+                  <div className="flex justify-between mt-1">
+                    <span className="text-xs text-white/50">Light</span>
+                    <span className="text-xs text-white/50">Dark</span>
+                  </div>
                 </div>
               </TabsContent>
               
@@ -243,7 +285,13 @@ const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange 
                     <label htmlFor="eyetracking" className="text-white/80">Eye Tracking</label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="facemapping" className="rounded text-white bg-black border-white/30" defaultChecked />
+                    <input 
+                      type="checkbox" 
+                      id="facemapping" 
+                      className="rounded text-white bg-black border-white/30" 
+                      checked={faceMappingEnabled}
+                      onChange={toggleFaceMapping}
+                    />
                     <label htmlFor="facemapping" className="text-white/80">AR Face Mapping</label>
                   </div>
                 </div>

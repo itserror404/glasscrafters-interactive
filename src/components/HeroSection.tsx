@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Circle } from 'lucide-react';
@@ -170,7 +169,7 @@ const HeroSection = () => {
             className="h-[300px] md:h-[400px] flex items-center justify-center mb-12"
           >
             <img 
-              src="/images/ar-glasses.png" 
+              src="/images/ar-glasses-vision-pro.png" 
               alt="LuminX AR Glasses" 
               className="max-w-full max-h-full object-contain"
             />
