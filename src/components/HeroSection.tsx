@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Circle } from 'lucide-react';
@@ -166,7 +165,6 @@ const HeroSection = () => {
             custom={3}
             variants={fadeUpVariants}
             initial="hidden"
-            animate="visible"
             className="h-[300px] md:h-[400px] flex items-center justify-center mb-8"
             animate={{ 
               y: [30, 0],
