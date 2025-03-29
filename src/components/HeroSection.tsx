@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Circle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -75,6 +76,31 @@ function AviatorBeanShape({
 
 const HeroSection = () => {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Transform mouse position to rotation values with limited range
+  const rotateY = useTransform(mouseX, [-300, 300], [10, -10]);
+  const rotateX = useTransform(mouseY, [-300, 300], [-10, 10]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        // Get container dimensions and position
+        const rect = containerRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        // Calculate mouse position relative to center of container
+        mouseX.set(e.clientX - centerX);
+        mouseY.set(e.clientY - centerY);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const fadeUpVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -160,18 +186,28 @@ const HeroSection = () => {
             </p>
           </motion.div>
           
-          {/* AR Glasses Image - Above buttons with larger size */}
+          {/* AR Glasses Image - Interactive with cursor */}
           <motion.div 
+            ref={containerRef}
             custom={3}
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[300px] md:h-[400px] flex items-center justify-center mb-8"
+            className="h-[360px] md:h-[500px] flex items-center justify-center mb-8 perspective-1000 cursor-pointer"
           >
-            <img 
+            <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
               alt="LuminX AR Glasses" 
-              className="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-700"
+              className="max-w-full max-h-full object-contain"
+              style={{
+                rotateY,
+                rotateX,
+                transition: "all 0.1s ease-out"
+              }}
+              whileHover={{ scale: 1.05 }}
+              drag
+              dragConstraints={containerRef}
+              dragElastic={0.1}
             />
           </motion.div>
 
