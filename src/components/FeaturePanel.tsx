@@ -13,15 +13,15 @@ const FeaturePanel: React.FC<FeaturePanelProps> = ({ title, description, icon })
 
   return (
     <div 
-      className={`glass-effect p-4 md:p-6 transition-all duration-300 ${isExpanded ? 'scale-105' : ''}`}
+      className={`modern-panel transition-all duration-300 ${isExpanded ? 'scale-[1.02]' : ''}`}
       onClick={() => setIsExpanded(!isExpanded)}
     >
       <div className="flex justify-between items-center cursor-pointer">
         <div className="flex items-center space-x-3">
-          <div className="text-glasscraft-blue">
+          <div className="text-white">
             {icon}
           </div>
-          <h3 className="font-bold text-lg text-white">{title}</h3>
+          <h3 className="font-medium text-lg text-white">{title}</h3>
         </div>
         <button className="text-white/70 hover:text-white">
           {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}

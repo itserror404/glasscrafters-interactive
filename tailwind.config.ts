@@ -64,10 +64,10 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				glasscraft: {
-					'dark': '#171717',
-					'blue': '#0EA5E9',
-					'purple': '#9B87F5',
-					'light-purple': '#E5DEFF',
+					'dark': '#000000',
+					'light': '#FFFFFF',
+					'gray': '#888888',
+					'accent': '#333333',
 				},
 			},
 			borderRadius: {
