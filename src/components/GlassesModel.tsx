@@ -122,8 +122,8 @@ const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
   // Materials with PBR properties
   const { frameMaterial, metalMaterial, lensMaterial, displayMaterial } = createGlassesMaterials(isHovered);
   
-  // Normal map for micro-scratches
-  const normalMap = useTexture('/textures/micro_scratches_normal.jpg');
+  // Normal map for micro-scratches - Updated path to use the correct folder
+  const normalMap = useTexture('/images/micro_scratches_normal.jpg');
   
   // Apply normal map to frame material
   useEffect(() => {
