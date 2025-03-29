@@ -167,7 +167,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[360px] md:h-[480px] flex items-center justify-center mb-8"
+            className="h-[300px] md:h-[400px] flex items-center justify-center mb-8"
             animate={{ 
               y: [30, 0],
               scale: [0.9, 1.1],
@@ -178,7 +178,7 @@ const HeroSection = () => {
             }}
           >
             <img 
-              src="/images/ar-glasses-vision-pro.png" 
+              src="/images/ar-glasses.png" 
               alt="LuminX AR Glasses" 
               className="max-w-full max-h-full object-contain transform hover:scale-105 transition-transform duration-700"
             />
