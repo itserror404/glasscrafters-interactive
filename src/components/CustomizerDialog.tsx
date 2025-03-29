@@ -63,10 +63,10 @@ const VisionProGlassesModel = ({ frameColor, lensColor, lensOpacity, lensMetal =
         <meshPhysicalMaterial
           color={frameColor}
           metalness={0.9}
-          roughness: 0.15,
-          clearcoat: 1.0,
-          clearcoatRoughness: 0.1,
-          sheen: 0.4,
+          roughness={0.15}
+          clearcoat={1.0}
+          clearcoatRoughness={0.1}
+          sheen={0.4}
         />
       </mesh>
       
