@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import CountdownTimer from './CountdownTimer';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
@@ -67,14 +66,6 @@ const Header = () => {
             <a href="#specs" className="text-white/80 hover:text-white transition-colors font-sf-pro">Specifications</a>
             <a href="#gallery" className="text-white/80 hover:text-white transition-colors font-sf-pro">Gallery</a>
           </motion.nav>
-          
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
-          >
-            <CountdownTimer />
-          </motion.div>
         </div>
         
         {/* Mobile Menu Button */}
@@ -125,11 +116,6 @@ const Header = () => {
             >
               Gallery
             </a>
-            
-            {/* Mobile Countdown */}
-            <div className="pt-4">
-              <CountdownTimer />
-            </div>
           </div>
         </motion.div>
       )}

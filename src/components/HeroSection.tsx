@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import GlassesModelScene from './GlassesModel';
+import CountdownTimer from './CountdownTimer';
 import CustomizerDialog from './CustomizerDialog';
 
 const HeroSection = () => {
@@ -20,7 +20,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
             <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-sf-pro"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 font-sf-pro"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
@@ -31,13 +31,13 @@ const HeroSection = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl lg:text-3xl text-white/70 mb-10 font-sf-pro"
+              className="text-2xl md:text-3xl lg:text-4xl text-white/70 mb-10 font-sf-pro"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
             >
               <span className="bg-gradient-to-r from-white/90 to-white/70 bg-clip-text text-transparent">
-                Augmented Reality, Perfected for Your Eyes.
+                See Beyond Reality. Experience Tomorrow, Today.
               </span>
             </motion.p>
             
@@ -61,41 +61,30 @@ const HeroSection = () => {
                 Customize
               </Button>
             </motion.div>
+            
+            <motion.div
+              className="mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
+            >
+              <CountdownTimer />
+            </motion.div>
           </div>
           
           <motion.div 
-            className="h-[400px] md:h-[500px]"
+            className="h-[400px] md:h-[500px] flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: 0.3 }}
           >
-            <GlassesModelScene scrollProgress={0} />
+            <img 
+              src="/images/ar-glasses.png" 
+              alt="LuminX AR Glasses" 
+              className="max-w-full max-h-full object-contain"
+            />
           </motion.div>
         </div>
-        
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-        >
-          <p className="text-white/60 text-sm mb-2 font-sf-pro">Scroll to explore</p>
-          <motion.div 
-            animate={{ 
-              y: [0, 8, 0],
-            }}
-            transition={{ 
-              repeat: Infinity, 
-              duration: 2,
-              ease: "easeInOut"
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
-            </svg>
-          </motion.div>
-        </motion.div>
       </div>
       
       {/* Customizer Dialog */}
