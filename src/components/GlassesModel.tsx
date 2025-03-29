@@ -1,22 +1,22 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { 
   PerspectiveCamera, 
   OrbitControls, 
   Environment, 
   ContactShadows,
-  useGLTF,
   Html,
   BakeShadows
 } from '@react-three/drei';
 import * as THREE from 'three';
-import { TextureLoader } from 'three/src/loaders/TextureLoader';
+// Removed the problematic import: import { TextureLoader } from 'three/src/loaders/TextureLoader';
 
 // Realistic glasses model
 const RealisticGlasses = ({ scrollProgress = 0, isHovered = false }) => {
-  const groupRef = useRef();
-  const frameRef = useRef();
+  // Add proper type annotation for the refs
+  const groupRef = useRef<THREE.Group>(null);
+  const frameRef = useRef<THREE.Mesh>(null);
   const targetRotation = useRef(new THREE.Euler());
   
   const glassMaterial = new THREE.MeshPhysicalMaterial({

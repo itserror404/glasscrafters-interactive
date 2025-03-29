@@ -26,7 +26,8 @@ const lensColors = [
 
 // Realistic customizable glasses model
 const CustomizableGlasses = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) => {
-  const groupRef = useRef();
+  // Add proper type annotation for the ref
+  const groupRef = useRef<THREE.Group>(null);
   
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color(frameColor),
