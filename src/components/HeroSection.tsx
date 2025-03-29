@@ -194,7 +194,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[500px] md:h-[700px] flex items-center justify-center mb-2 perspective-1000 cursor-pointer"
+            className="h-[500px] md:h-[700px] flex items-center justify-center mb-0 perspective-1000 cursor-pointer"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
