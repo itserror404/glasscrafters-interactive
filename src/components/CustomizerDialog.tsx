@@ -113,13 +113,18 @@ const VisionProModel = ({ frameColor, lensColor, lensOpacity, lensMetal = 0 }) =
   );
 };
 
-const CustomizerDialog = ({ open, onOpenChange }) => {
+interface CustomizerDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+const CustomizerDialog: React.FC<CustomizerDialogProps> = ({ open, onOpenChange }) => {
   const [selectedFrameColor, setSelectedFrameColor] = useState(frameColors[0].value);
   const [selectedLensColor, setSelectedLensColor] = useState(lensColors[0].value);
   const [selectedLensOpacity, setSelectedLensOpacity] = useState(lensColors[0].opacity);
   const [selectedLensMetal, setSelectedLensMetal] = useState(0);
 
-  const handleLensColorChange = (color, opacity, metalness = 0) => {
+  const handleLensColorChange = (color: string, opacity: number, metalness = 0) => {
     setSelectedLensColor(color);
     setSelectedLensOpacity(opacity);
     setSelectedLensMetal(metalness);
@@ -236,6 +241,10 @@ const CustomizerDialog = ({ open, onOpenChange }) => {
                   <div className="flex items-center space-x-2">
                     <input type="checkbox" id="eyetracking" className="rounded text-white bg-black border-white/30" defaultChecked />
                     <label htmlFor="eyetracking" className="text-white/80">Eye Tracking</label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="facemapping" className="rounded text-white bg-black border-white/30" defaultChecked />
+                    <label htmlFor="facemapping" className="text-white/80">AR Face Mapping</label>
                   </div>
                 </div>
               </TabsContent>

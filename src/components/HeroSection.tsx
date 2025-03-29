@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Circle } from 'lucide-react';
@@ -209,7 +210,10 @@ const HeroSection = () => {
         </div>
       </div>
       
-      <CustomizerDialog open={isCustomizerOpen} onOpenChange={setIsCustomizerOpen} />
+      <CustomizerDialog 
+        open={isCustomizerOpen} 
+        onOpenChange={setIsCustomizerOpen} 
+      />
     </section>
   );
 };
