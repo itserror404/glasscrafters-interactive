@@ -6,6 +6,7 @@ import CarouselSection from '@/components/CarouselSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import TechnicalDetails from '@/components/TechnicalDetails';
 import NewsletterAndFooter from '@/components/NewsletterAndFooter';
+import CustomizeCallToAction from '@/components/CustomizeCallToAction';
 
 const Index = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -43,6 +44,11 @@ const Index = () => {
       {/* Technical Details Section */}
       <div id="specs">
         <TechnicalDetails />
+      </div>
+      
+      {/* Customize Call To Action Section */}
+      <div id="customize">
+        <CustomizeCallToAction />
       </div>
       
       {/* Newsletter and Footer */}
