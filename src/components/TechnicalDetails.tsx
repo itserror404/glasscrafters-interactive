@@ -190,13 +190,13 @@ const TechnicalDetails = () => {
         />
         
         <ImageCard 
-          src="/images/feature-1.jpg" 
+          src="/images/21.jpg" 
           alt="Immersive Experience"
           className="aspect-square"
         />
         
         <ImageCard 
-          src="/images/feature-2.jpg" 
+          src="/images/25.jpg" 
           alt="Spatial Mapping"
           className="aspect-square"
         />
