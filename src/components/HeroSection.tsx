@@ -116,10 +116,36 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-12 pb-20 px-6 sm:px-8 md:px-12 lg:px-24 ">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-6 pb-16 px-6 sm:px-8 md:px-12 lg:px-24">
       <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f] via-black to-[#1d1d1f] z-0"></div>
       
+      {/* Background Bean Shapes */}
+      <AviatorBeanShape 
+        className="top-[10%] left-[10%] opacity-40" 
+        width={500} 
+        height={200} 
+        rotate={-20} 
+        delay={0.2}
+        gradient="from-[#2997ff]/[0.08]"
+      />
       
+      <AviatorBeanShape 
+        className="top-[35%] right-[5%] opacity-30" 
+        width={600} 
+        height={250} 
+        rotate={15} 
+        delay={0.5}
+        gradient="from-[#5e5ce6]/[0.1]"
+      />
+      
+      <AviatorBeanShape 
+        className="bottom-[15%] left-[20%] opacity-25" 
+        width={450} 
+        height={180} 
+        rotate={25} 
+        delay={0.8}
+        gradient="from-white/[0.05]"
+      />
       
       <div className="relative z-10 container mx-auto">
         <div className="max-w-3xl mx-auto text-center">
@@ -128,7 +154,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-3 md:mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-2"
           >
             <Circle className="h-2 w-2 fill-[#2997ff]/80" />
             <span className="text-sm text-white/60 tracking-wide">
@@ -141,7 +167,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="-mb-12" 
+            className="mb-4" 
           >
             <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
@@ -157,12 +183,12 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[700px] md:h-[850px] flex items-center justify-center mt-0  perspective-1000 cursor-pointer"
+            className="h-[600px] md:h-[700px] flex items-center justify-center -mt-6 -mb-10 perspective-1000 cursor-pointer"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
               alt="LuminX AR Glasses" 
-              className="object-contain  w-[600px] md:w-[800px] h-[500px] md:h-[700px] "
+              className="object-contain w-[700px] md:w-[900px] h-[500px] md:h-[700px]"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ 
@@ -187,7 +213,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-16"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-8"
           >
             <Button 
               className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
@@ -209,7 +235,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mt-8"
+            className="mt-4"
           >
             <CountdownTimer />
           </motion.div>
