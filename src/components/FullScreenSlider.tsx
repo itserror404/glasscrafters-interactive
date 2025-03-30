@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -32,16 +31,14 @@ const FullScreenSlider = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  // Prevent right-click on images
   const preventContextMenu = (e) => {
     e.preventDefault();
   };
 
-  // Auto-advance slides with slower timing (increased from 5000ms to 8000ms)
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 8000); // Slower transition (8 seconds instead of 5)
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -71,12 +68,12 @@ const FullScreenSlider = () => {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 100, damping: 30 }, // Reduced stiffness for smoother transitions
-            opacity: { duration: 1.0 } // Increased duration for smoother fade
+            x: { type: "spring", stiffness: 100, damping: 30 },
+            opacity: { duration: 1.0 }
           }}
           className="absolute inset-0 h-full w-full"
         >
-          <div className="absolute inset-0 bg-black/30 z-10" /> {/* Reduced overlay opacity for brighter images */}
+          <div className="absolute inset-0 bg-black/30 z-10" />
           <div 
             className="absolute inset-0 z-5"
             onContextMenu={preventContextMenu}
@@ -84,20 +81,22 @@ const FullScreenSlider = () => {
             <img
               src={images[currentIndex]}
               alt={`LuminX in ${imageLabels[currentIndex].split(' - ')[0]}`}
-              className="h-full w-full object-cover brightness-125 contrast-110 pointer-events-none" // Added pointer-events-none
+              className="h-full w-full object-cover brightness-125 contrast-110 pointer-events-none"
               style={{ 
-                filter: 'saturate(1.2)',  // Increased saturation
-                userSelect: 'none', // Prevent selection
-                WebkitUserDrag: 'none', // Prevent dragging in WebKit browsers
+                filter: 'saturate(1.2)',
+                userSelect: 'none', 
+                WebkitUserSelect: 'none',
+                userDrag: 'none',
+                WebkitUserDrag: 'none'
               }}
-              draggable="false" // Prevent dragging
+              draggable="false"
             />
           </div>
           <div className="absolute bottom-0 left-0 right-0 z-20 p-8 md:p-16 bg-gradient-to-t from-black/80 to-transparent">
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }} // Slower text animations
+              transition={{ delay: 0.3, duration: 0.8 }}
               className="text-xl md:text-3xl font-bold text-white mb-4"
             >
               {imageLabels[currentIndex].split(' - ')[0]}
@@ -105,8 +104,8 @@ const FullScreenSlider = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }} // Slower text animations
-              className="text-base md:text-xl text-white/90" // Increased text opacity
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-base md:text-xl text-white/90"
             >
               {imageLabels[currentIndex].split(' - ')[1]}
             </motion.p>
