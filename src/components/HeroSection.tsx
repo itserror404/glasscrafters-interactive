@@ -33,7 +33,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4"
           >
             <Circle className="h-2 w-2 fill-[#2997ff]/80" />
             <span className="text-sm text-white/60 tracking-wide">
@@ -46,7 +46,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mb-2" 
+            className="mb-0" 
           >
             <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
@@ -60,7 +60,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-12 mb-0 perspective-1000"
+            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-16 mb-0 perspective-1000"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
@@ -81,7 +81,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-16"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-20"
           >
             <Button 
               className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
