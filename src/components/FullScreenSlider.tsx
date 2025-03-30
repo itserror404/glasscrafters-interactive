@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -20,6 +21,33 @@ const imageLabels = [
 const FullScreenSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
+
+  // Preload all images on component mount
+  useEffect(() => {
+    const preloadImages = async () => {
+      const loadStatuses = Array(images.length).fill(false);
+      
+      const promises = images.map((src, index) => {
+        return new Promise<void>((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            loadStatuses[index] = true;
+            setImagesLoaded([...loadStatuses]);
+            resolve();
+          };
+          img.onerror = () => {
+            resolve(); // Still resolve on error so the app doesn't hang
+          };
+        });
+      });
+      
+      await Promise.all(promises);
+    };
+    
+    preloadImages();
+  }, []);
 
   const handleNext = () => {
     setDirection(1);
@@ -57,8 +85,18 @@ const FullScreenSlider = () => {
     })
   };
 
+  // Calculate which images we need to render
+  const nextIndex = (currentIndex + 1) % images.length;
+  const prevIndex = (currentIndex - 1 + images.length) % images.length;
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
+      {/* Preload adjacent images */}
+      <div className="hidden">
+        <img src={images[nextIndex]} alt="Preload next" />
+        <img src={images[prevIndex]} alt="Preload previous" />
+      </div>
+      
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentIndex}
@@ -69,7 +107,7 @@ const FullScreenSlider = () => {
           exit="exit"
           transition={{
             x: { type: "spring", stiffness: 100, damping: 30 },
-            opacity: { duration: 1.0 }
+            opacity: { duration: 0.3 },
           }}
           className="absolute inset-0 h-full w-full"
         >
