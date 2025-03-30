@@ -32,11 +32,11 @@ const FullScreenSlider = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  // Auto-advance slides
+  // Auto-advance slides with slower timing (increased from 5000ms to 8000ms)
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 5000);
+    }, 8000); // Slower transition (8 seconds instead of 5)
     return () => clearInterval(interval);
   }, []);
 
@@ -66,22 +66,27 @@ const FullScreenSlider = () => {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.5 }
+            x: { type: "spring", stiffness: 100, damping: 30 }, // Reduced stiffness for smoother transitions
+            opacity: { duration: 1.0 } // Increased duration for smoother fade
           }}
           className="absolute inset-0 h-full w-full"
         >
-          <div className="absolute inset-0 bg-black/50 z-10" />
-          <img
-            src={images[currentIndex]}
-            alt={`LuminX in ${imageLabels[currentIndex].split(' - ')[0]}`}
-            className="h-full w-full object-cover"
-          />
+          <div className="absolute inset-0 bg-black/30 z-10" /> {/* Reduced overlay opacity for brighter images */}
+          <div className="absolute inset-0 z-5">
+            <img
+              src={images[currentIndex]}
+              alt={`LuminX in ${imageLabels[currentIndex].split(' - ')[0]}`}
+              className="h-full w-full object-cover brightness-125 contrast-110" // Added brightness and contrast
+              style={{ 
+                filter: 'saturate(1.2)',  // Increased saturation
+              }}
+            />
+          </div>
           <div className="absolute bottom-0 left-0 right-0 z-20 p-8 md:p-16 bg-gradient-to-t from-black/80 to-transparent">
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.3, duration: 0.8 }} // Slower text animations
               className="text-xl md:text-3xl font-bold text-white mb-4"
             >
               {imageLabels[currentIndex].split(' - ')[0]}
@@ -89,8 +94,8 @@ const FullScreenSlider = () => {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-base md:text-xl text-white/80"
+              transition={{ delay: 0.5, duration: 0.8 }} // Slower text animations
+              className="text-base md:text-xl text-white/90" // Increased text opacity
             >
               {imageLabels[currentIndex].split(' - ')[1]}
             </motion.p>
