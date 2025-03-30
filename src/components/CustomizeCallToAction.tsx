@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import CustomizerDialog from './CustomizerDialog';
+import PreOrderDialog from './PreOrderDialog';
 
 const CustomizeCallToAction = () => {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
 
   return (
     <section className="relative py-32 bg-gradient-to-b from-[#1d1d1f] to-black overflow-hidden">
@@ -29,18 +31,31 @@ const CustomizeCallToAction = () => {
           <p className="text-xl text-white/70 mb-10">
             Configure your perfect pair of AR glasses with our immersive customization tool. Choose colors, features, and accessories to match your unique style and needs.
           </p>
-          <Button 
-            className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-2 px-6 text-base font-medium rounded-xl"
-            onClick={() => setIsCustomizerOpen(true)}
-          >
-            Customize Now
-          </Button>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button 
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-2 px-4 text-sm font-medium rounded-xl"
+              onClick={() => setIsCustomizerOpen(true)}
+            >
+              Customize Now
+            </Button>
+            <Button 
+              className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-2 px-4 text-sm font-medium rounded-xl"
+              onClick={() => setIsPreOrderOpen(true)}
+            >
+              Pre-order
+            </Button>
+          </div>
         </motion.div>
       </div>
 
       <CustomizerDialog 
         open={isCustomizerOpen}
         onOpenChange={setIsCustomizerOpen}
+      />
+
+      <PreOrderDialog
+        open={isPreOrderOpen}
+        onOpenChange={setIsPreOrderOpen}
       />
     </section>
   );
