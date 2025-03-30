@@ -83,6 +83,15 @@ const HeroSection = () => {
             />
           </motion.div>
 
+          <motion.div
+            custom={5}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <CountdownTimer />
+          </motion.div>
+
           <motion.div 
             custom={4}
             variants={fadeUpVariants}
@@ -104,14 +113,7 @@ const HeroSection = () => {
             </Button>
           </motion.div>
           
-          <motion.div
-            custom={5}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <CountdownTimer />
-          </motion.div>
+          
         </div>
       </div>
       
