@@ -32,6 +32,11 @@ const FullScreenSlider = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
+  // Prevent right-click on images
+  const preventContextMenu = (e) => {
+    e.preventDefault();
+  };
+
   // Auto-advance slides with slower timing (increased from 5000ms to 8000ms)
   useEffect(() => {
     const interval = setInterval(() => {
@@ -72,14 +77,20 @@ const FullScreenSlider = () => {
           className="absolute inset-0 h-full w-full"
         >
           <div className="absolute inset-0 bg-black/30 z-10" /> {/* Reduced overlay opacity for brighter images */}
-          <div className="absolute inset-0 z-5">
+          <div 
+            className="absolute inset-0 z-5"
+            onContextMenu={preventContextMenu}
+          >
             <img
               src={images[currentIndex]}
               alt={`LuminX in ${imageLabels[currentIndex].split(' - ')[0]}`}
-              className="h-full w-full object-cover brightness-125 contrast-110" // Added brightness and contrast
+              className="h-full w-full object-cover brightness-125 contrast-110 pointer-events-none" // Added pointer-events-none
               style={{ 
                 filter: 'saturate(1.2)',  // Increased saturation
+                userSelect: 'none', // Prevent selection
+                WebkitUserDrag: 'none', // Prevent dragging in WebKit browsers
               }}
+              draggable="false" // Prevent dragging
             />
           </div>
           <div className="absolute bottom-0 left-0 right-0 z-20 p-8 md:p-16 bg-gradient-to-t from-black/80 to-transparent">
