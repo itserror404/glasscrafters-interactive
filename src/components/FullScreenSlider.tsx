@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const images = [
-  "/images/night-sky.jpg",
+  "/images/22.jpg",
   "/images/55.jpg",
   "/images/6.gif",
   "/images/5.gif"

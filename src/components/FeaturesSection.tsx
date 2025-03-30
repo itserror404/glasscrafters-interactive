@@ -78,7 +78,7 @@ const FeaturesSection = () => {
     {
       title: "All-Day Battery Life",
       description: "Our revolutionary power management system delivers up to 36 hours of use on a single charge, so you can stay connected all day and night.",
-      image: "/images/feature-4.jpg",
+      image: "/images/23.jpg",
       bgColor: "bg-black",
       isReversed: true
     }
