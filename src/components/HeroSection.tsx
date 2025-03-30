@@ -116,7 +116,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-12 pb-20 px-6 sm:px-8 md:px-12 lg:px-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-12 pb-20 px-6 sm:px-8 md:px-12 lg:px-24  -mt-20">
       <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f] via-black to-[#1d1d1f] z-0"></div>
       
       {/* Background Shapes */}
