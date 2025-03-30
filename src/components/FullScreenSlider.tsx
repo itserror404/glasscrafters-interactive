@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import CountdownTimer from './CountdownTimer';
 
 const images = [
   "/images/22.jpg",
@@ -79,7 +78,7 @@ const FullScreenSlider = () => {
     center: {
       x: 0,
       opacity: 1
-    }, 
+    },
     exit: (direction: number) => ({
       x: direction < 0 ? '100%' : '-100%',
       opacity: 0
@@ -141,36 +140,29 @@ const FullScreenSlider = () => {
             >
               {imageLabels[currentIndex].split(' - ')[1]}
             </motion.p>
-            
-            {/* Countdown Timer */}
-            <div className="mt-8 mb-8 max-w-lg mx-auto">
-              <CountdownTimer />
-            </div>
-            
-            {/* Navigation buttons - Now below countdown and larger */}
-            <div className="mt-10 flex justify-center items-center space-x-8 z-50 pointer-events-none">
-              <Button
-                onClick={handlePrevious}
-                variant="outline"
-                size="icon"
-                className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20 pointer-events-auto"
-              >
-                <ChevronLeft className="h-10 w-10" />
-              </Button>
-              <Button
-                onClick={handleNext}
-                variant="outline" 
-                size="icon"
-                className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20 pointer-events-auto"
-              >
-                <ChevronRight className="h-10 w-10" />
-              </Button>
-            </div>
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Slide indicators moved down */}
+      <div className="absolute inset-x-0 top-1/2 flex justify-between items-center px-4 md:px-10 z-30 transform -translate-y-1/2">
+        <Button
+          onClick={handlePrevious}
+          variant="outline"
+          size="icon"
+          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </Button>
+        <Button
+          onClick={handleNext}
+          variant="outline" 
+          size="icon"
+          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </Button>
+      </div>
+
       <div className="absolute bottom-4 md:bottom-8 inset-x-0 flex justify-center space-x-2 z-30">
         {images.map((_, index) => (
           <button

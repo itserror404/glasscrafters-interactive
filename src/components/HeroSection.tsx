@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import CountdownTimer from './CountdownTimer';
 import CustomizerDialog from './CustomizerDialog';
 import PreOrderDialog from './PreOrderDialog';
 import { WavyBackground } from './ui/wavy-background';
@@ -83,25 +84,33 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div 
+            custom={4}
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16"
+          >
+            <Button 
+              className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-2 px-4 text-sm font-medium rounded-xl shadow-lg hover:shadow-[#2997ff]/20 hover:shadow-xl transition-all duration-300"
+              onClick={() => setIsPreOrderOpen(true)}
+            >
+              Pre-order
+            </Button>
+            <Button 
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-2 px-4 text-sm font-medium rounded-xl shadow-lg hover:shadow-white/10 hover:shadow-xl transition-all duration-300"
+              onClick={() => setIsCustomizerOpen(true)}
+            >
+              Customize
+            </Button>
+          </motion.div>
+          
+          <motion.div
             custom={5}
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
           >
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
-              <Button 
-                className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-2 px-4 text-sm font-medium rounded-xl shadow-lg hover:shadow-[#2997ff]/20 hover:shadow-xl transition-all duration-300"
-                onClick={() => setIsPreOrderOpen(true)}
-              >
-                Pre-order
-              </Button>
-              <Button 
-                className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-2 px-4 text-sm font-medium rounded-xl shadow-lg hover:shadow-white/10 hover:shadow-xl transition-all duration-300"
-                onClick={() => setIsCustomizerOpen(true)}
-              >
-                Customize
-              </Button>
-            </div>
+            <CountdownTimer />
           </motion.div>
         </div>
       </div>
