@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -57,7 +58,7 @@ const FullScreenSlider = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  const preventContextMenu = (e) => {
+  const preventContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
   };
 
@@ -140,22 +141,23 @@ const FullScreenSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-16 md:bottom-24 inset-x-0 flex justify-center space-x-4 z-50">
+      {/* Arrow buttons */}
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 z-50 pointer-events-none">
         <Button
           onClick={handlePrevious}
           variant="outline"
           size="icon"
-          className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20"
+          className="h-16 w-16 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 shadow-lg pointer-events-auto"
         >
-          <ChevronLeft className="h-10 w-10" />
+          <ChevronLeft className="h-8 w-8" />
         </Button>
         <Button
           onClick={handleNext}
           variant="outline" 
           size="icon"
-          className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20"
+          className="h-16 w-16 rounded-full bg-black/50 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 shadow-lg pointer-events-auto"
         >
-          <ChevronRight className="h-10 w-10" />
+          <ChevronRight className="h-8 w-8" />
         </Button>
       </div>
 

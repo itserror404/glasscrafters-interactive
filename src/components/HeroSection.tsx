@@ -112,8 +112,6 @@ const HeroSection = () => {
               Customize
             </Button>
           </motion.div>
-          
-          
         </div>
       </div>
       
