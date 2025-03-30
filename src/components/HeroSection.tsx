@@ -178,7 +178,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mb-2 mt-12" // Reduced spacing here
+            className="mb-0" // Reduced spacing here
           >
             <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
