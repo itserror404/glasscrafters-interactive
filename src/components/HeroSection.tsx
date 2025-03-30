@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import CountdownTimer from './CountdownTimer';
 import CustomizerDialog from './CustomizerDialog';
+import { WavyBackground } from './ui/wavy-background';
 
 const HeroSection = () => {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
@@ -58,18 +59,29 @@ const HeroSection = () => {
             animate="visible"
             className="h-[500px] md:h-[600px] flex items-center justify-center -mt-16 mb-0 perspective-1000"
           >
-            <motion.img 
-              src="/images/ar-glasses-vision-pro.png" 
-              alt="LuminX AR Glasses" 
-              className="object-contain w-[700px] md:w-[900px] h-[500px] md:h-[600px]"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ 
-                duration: 1.2, 
-                delay: 0.8,
-                ease: [0.25, 0.4, 0.25, 1]
-              }}
-            />
+            <WavyBackground
+              colors={["#2997ff", "#5e5ce6", "#2563eb", "#22d3ee", "#1e40af"]}
+              waveWidth={40}
+              backgroundFill="#030303"
+              blur={5}
+              speed="slow"
+              waveOpacity={0.3}
+              containerClassName="h-full w-full absolute"
+              className="w-full h-full flex items-center justify-center"
+            >
+              <motion.img 
+                src="/images/ar-glasses-vision-pro.png" 
+                alt="LuminX AR Glasses" 
+                className="object-contain w-[700px] md:w-[900px] h-[500px] md:h-[600px] relative z-10"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 0.8,
+                  ease: [0.25, 0.4, 0.25, 1]
+                }}
+              />
+            </WavyBackground>
           </motion.div>
 
           <motion.div 
