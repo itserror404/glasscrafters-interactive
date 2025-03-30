@@ -72,7 +72,7 @@ const FeaturesSection = () => {
     {
       title: "Spatial Awareness",
       description: "LuminX maps your surroundings in real-time, allowing digital objects to interact with physical space. Experience content that adapts to your environment.",
-      image: "/images/lumnix2.png",
+      image: "/images/luminx2.png",
       bgColor: "bg-[#1d1d1f]"
     },
     {
