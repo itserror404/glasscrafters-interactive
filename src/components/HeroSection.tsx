@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Circle } from 'lucide-react';
@@ -47,7 +46,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mb-4" 
+            className="mb-2" 
           >
             <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
@@ -56,13 +55,12 @@ const HeroSection = () => {
             </p>
           </motion.div>
           
-          {/* AR Glasses Image - No cursor interaction */}
           <motion.div 
             custom={3}
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-8 mb-0 perspective-1000"
+            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-12 mb-0 perspective-1000"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
@@ -83,7 +81,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-20"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-16"
           >
             <Button 
               className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
