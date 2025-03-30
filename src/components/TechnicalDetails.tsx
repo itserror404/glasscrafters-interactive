@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -190,7 +189,6 @@ const TechnicalDetails = () => {
           description="Near-zero latency for seamless real-time interactions"
         />
         
-        {/* Image cards after Response Time */}
         <ImageCard 
           src="/images/feature-1.jpg" 
           alt="Immersive Experience"
@@ -200,12 +198,6 @@ const TechnicalDetails = () => {
         <ImageCard 
           src="/images/feature-2.jpg" 
           alt="Spatial Mapping"
-          className="aspect-square"
-        />
-        
-        <ImageCard 
-          src="/images/feature-3.jpg" 
-          alt="Gesture Control"
           className="aspect-square"
         />
       </motion.div>
