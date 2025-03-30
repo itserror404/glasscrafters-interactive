@@ -119,7 +119,44 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-12 pb-20 px-6 sm:px-8 md:px-12 lg:px-24">
       <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f] via-black to-[#1d1d1f] z-0"></div>
       
-      
+      {/* Background Shapes */}
+      <div className="absolute inset-0 rounded-bean overflow-hidden">
+        <AviatorBeanShape
+          delay={0.3}
+          width={600}
+          height={160}
+          rotate={12}
+          gradient="from-[#2997ff]/[0.15]"
+          className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
+        />
+
+        <AviatorBeanShape
+          delay={0.5}
+          width={500}
+          height={140}
+          rotate={-15}
+          gradient="from-[#5e5ce6]/[0.15]"
+          className="right-[-5%] md:right-[0%] top-[70%] md:top-[75%]"
+        />
+
+        <AviatorBeanShape
+          delay={0.4}
+          width={300}
+          height={100}
+          rotate={-8}
+          gradient="from-[#2997ff]/[0.15]"
+          className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
+        />
+
+        <AviatorBeanShape
+          delay={0.6}
+          width={200}
+          height={80}
+          rotate={20}
+          gradient="from-[#5e5ce6]/[0.15]"
+          className="right-[15%] md:right-[20%] top-[10%] md:top-[15%]"
+        />
+      </div>
       
       <div className="relative z-10 container mx-auto">
         <div className="max-w-3xl mx-auto text-center">
@@ -141,7 +178,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="-mb-12" 
+            className="-mb-12" // Reduced spacing here
           >
             <p className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-[#2997ff] via-white/90 to-[#5e5ce6]">
               See Beyond Reality. 
@@ -157,7 +194,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[700px] md:h-[850px] flex items-center justify-center -mt-20  perspective-1000 cursor-pointer"
+            className="h-[700px] md:h-[850px] flex items-center justify-center mb-0 perspective-1000 cursor-pointer"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
