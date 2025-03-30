@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Circle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CountdownTimer from './CountdownTimer';
 import CustomizerDialog from './CustomizerDialog';
-import { cn } from '@/lib/utils';
 
 const HeroSection = () => {
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
@@ -23,7 +21,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-6 pb-16 px-6 sm:px-8 md:px-12 lg:px-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303] pt-24 pb-16 px-6 sm:px-8 md:px-12 lg:px-24">
       <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f] via-black to-[#1d1d1f] z-0"></div>
       
       <div className="relative z-10 container mx-auto">
@@ -33,12 +31,9 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4"
+            className="mb-4"
           >
-            <Circle className="h-2 w-2 fill-[#2997ff]/80" />
-            <span className="text-sm text-white/60 tracking-wide">
-              LuminX
-            </span>
+            <h1 className="text-2xl font-bold text-white/80">LuminX</h1>
           </motion.div>
 
           <motion.div
