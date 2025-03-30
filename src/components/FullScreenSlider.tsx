@@ -8,7 +8,7 @@ const images = [
   "/images/night-sky.jpg",
   "/images/urban-city.jpg",
   "/images/sunset.jpg",
-  "/images/5.mp4"
+  "/images/5.gif"
 ];
 
 const imageLabels = [

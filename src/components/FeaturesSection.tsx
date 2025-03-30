@@ -59,13 +59,13 @@ const FeaturesSection = () => {
     {
       title: "Immersive Visual Experience",
       description: "4K micro-OLED displays with a 110° field of view provide an unparalleled augmented reality experience that seamlessly blends digital information with your environment.",
-      image: "/images/3.mp4",
+      image: "/images/3.gif",
       bgColor: "bg-[#1d1d1f]"
     },
     {
       title: "Intuitive Gesture Control",
       description: "Navigate your digital world with natural hand movements. Our advanced sensors track your gestures with millimeter precision for effortless interaction.",
-      image: "/images/2.mp4",
+      image: "/images/2.gif",
       bgColor: "bg-black",
       isReversed: true
     },
