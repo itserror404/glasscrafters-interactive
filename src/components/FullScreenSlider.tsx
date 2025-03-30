@@ -79,7 +79,7 @@ const FullScreenSlider = () => {
     center: {
       x: 0,
       opacity: 1
-    }),
+    }, // Removed extra parenthesis here
     exit: (direction: number) => ({
       x: direction < 0 ? '100%' : '-100%',
       opacity: 0
