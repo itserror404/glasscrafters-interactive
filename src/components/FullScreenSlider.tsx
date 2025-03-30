@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const images = [
   "/images/22.jpg",
-  "/images/55.jpg",
+  "/images/55.jpg", 
   "/images/6.gif",
   "/images/5.gif"
 ];
@@ -81,14 +81,7 @@ const FullScreenSlider = () => {
             <img
               src={images[currentIndex]}
               alt={`LuminX in ${imageLabels[currentIndex].split(' - ')[0]}`}
-              className="h-full w-full object-cover brightness-125 contrast-110 pointer-events-none"
-              style={{ 
-                filter: 'saturate(1.2)',
-                userSelect: 'none', 
-                WebkitUserSelect: 'none',
-                userDrag: 'none',
-                WebkitUserDrag: 'none'
-              }}
+              className="h-full w-full object-cover brightness-125 contrast-110 pointer-events-none select-none"
               draggable="false"
             />
           </div>
