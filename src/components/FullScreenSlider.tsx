@@ -108,7 +108,7 @@ const FullScreenSlider = () => {
           onClick={handlePrevious}
           variant="outline"
           size="icon"
-          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12"
+          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
         >
           <ChevronLeft className="h-6 w-6" />
         </Button>
@@ -116,7 +116,7 @@ const FullScreenSlider = () => {
           onClick={handleNext}
           variant="outline" 
           size="icon"
-          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12"
+          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
         >
           <ChevronRight className="h-6 w-6" />
         </Button>

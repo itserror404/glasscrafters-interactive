@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 flex items-center"
+      className="fixed top-0 left-0 right-0 z-40 flex items-center pointer-events-none"
       initial={{ 
         backgroundColor: "rgba(29, 29, 31, 0)", 
         backdropFilter: "blur(0px)",
@@ -43,7 +43,7 @@ const Header = () => {
       animate={controls}
       transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 flex justify-between items-center">
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-24 flex justify-between items-center pointer-events-auto">
         <div className="flex items-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -88,7 +88,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <motion.div 
-          className="absolute top-full left-0 right-0 bg-[#1d1d1f]/95 backdrop-blur-lg md:hidden"
+          className="absolute top-full left-0 right-0 bg-[#1d1d1f]/95 backdrop-blur-lg md:hidden pointer-events-auto"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
