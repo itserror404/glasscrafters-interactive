@@ -30,7 +30,7 @@ const CustomizeCallToAction = () => {
             Configure your perfect pair of AR glasses with our immersive customization tool. Choose colors, features, and accessories to match your unique style and needs.
           </p>
           <Button 
-            className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-10 text-lg font-medium rounded-full"
+            className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-2 px-6 text-base font-medium rounded-xl"
             onClick={() => setIsCustomizerOpen(true)}
           >
             Customize Now

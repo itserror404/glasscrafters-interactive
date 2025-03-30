@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -64,7 +65,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-16 mb-0 perspective-1000"
+            className="h-[500px] md:h-[600px] flex items-center justify-center -mt-16 mb-8"
           >
             <motion.img 
               src="/images/ar-glasses-vision-pro.png" 
@@ -85,17 +86,15 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-20"
+            className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12"
           >
             <Button 
-              className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-6 px-10 text-lg font-medium rounded-xl shadow-lg hover:shadow-[#2997ff]/20 hover:shadow-xl transition-all duration-300"
-              style={{ minWidth: "180px" }}
+              className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-2 px-6 text-base font-medium rounded-xl shadow-lg hover:shadow-[#2997ff]/20 hover:shadow-xl transition-all duration-300"
             >
               Pre-order
             </Button>
             <Button 
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-6 px-10 text-lg font-medium rounded-xl shadow-lg hover:shadow-white/10 hover:shadow-xl transition-all duration-300"
-              style={{ minWidth: "180px" }}
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-2 px-6 text-base font-medium rounded-xl shadow-lg hover:shadow-white/10 hover:shadow-xl transition-all duration-300"
               onClick={() => setIsCustomizerOpen(true)}
             >
               Customize
@@ -107,7 +106,6 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mt-8"
           >
             <CountdownTimer />
           </motion.div>

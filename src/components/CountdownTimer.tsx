@@ -50,7 +50,7 @@ const CountdownTimer = () => {
   };
 
   return (
-    <div className="w-full glass-effect bg-gradient-to-r from-black/80 to-[#1d1d1f]/80 p-5 md:p-6 rounded-xl border border-white/10 shadow-lg backdrop-blur-xl flex flex-col items-center">
+    <div className="w-full border border-white/10 p-5 md:p-6 rounded-xl shadow-lg backdrop-blur-sm">
       <h3 className="text-center text-white/70 text-sm md:text-base uppercase tracking-widest mb-4 font-semibold">
         Launch Countdown
       </h3>
@@ -69,8 +69,8 @@ const CountdownTimer = () => {
 
 const TimeUnit = ({ value, label }: { value: string, label: string }) => (
   <div className="flex flex-col items-center">
-    <div className="bg-gradient-to-b from-[#2997ff]/20 to-transparent px-3 py-2 rounded-lg">
-      <div className="text-glasscraft-blue text-2xl md:text-4xl font-bold animate-countdown">
+    <div className="px-3 py-2 rounded-lg">
+      <div className="text-[#2997ff] text-2xl md:text-4xl font-bold animate-countdown">
         {value}
       </div>
     </div>
