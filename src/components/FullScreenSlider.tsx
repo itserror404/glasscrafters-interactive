@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -23,7 +22,6 @@ const FullScreenSlider = () => {
   const [direction, setDirection] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
 
-  // Preload all images on component mount
   useEffect(() => {
     const preloadImages = async () => {
       const loadStatuses = Array(images.length).fill(false);
@@ -85,13 +83,11 @@ const FullScreenSlider = () => {
     })
   };
 
-  // Calculate which images we need to render
   const nextIndex = (currentIndex + 1) % images.length;
   const prevIndex = (currentIndex - 1 + images.length) % images.length;
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Preload adjacent images */}
       <div className="hidden">
         <img src={images[nextIndex]} alt="Preload next" />
         <img src={images[prevIndex]} alt="Preload previous" />
@@ -144,22 +140,22 @@ const FullScreenSlider = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-x-0 top-1/2 flex justify-between items-center px-4 md:px-10 z-30 transform -translate-y-1/2">
+      <div className="absolute bottom-16 md:bottom-24 inset-x-0 flex justify-center space-x-4 z-50">
         <Button
           onClick={handlePrevious}
           variant="outline"
           size="icon"
-          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
+          className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-10 w-10" />
         </Button>
         <Button
           onClick={handleNext}
           variant="outline" 
           size="icon"
-          className="bg-black/30 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-12 w-12 z-50"
+          className="bg-black/50 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 rounded-full h-20 w-20"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-10 w-10" />
         </Button>
       </div>
 
