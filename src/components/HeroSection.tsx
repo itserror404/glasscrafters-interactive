@@ -88,8 +88,9 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
+            className="mb-8"
           >
-            <CountdownTimer />
+            < CountdownTimer />
           </motion.div>
 
           <motion.div 
