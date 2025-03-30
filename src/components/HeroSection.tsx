@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -79,14 +80,14 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 -mt-20"
           >
             <Button 
-              className="bg-[#2997ff] hover:bg-[#2997ff]/90 text-white py-6 px-8 text-lg font-medium rounded-full"
-              style={{ minWidth: "160px" }}
+              className="bg-gradient-to-r from-[#2997ff] to-[#2997ff]/80 hover:bg-[#2997ff]/90 text-white py-6 px-10 text-lg font-medium rounded-xl shadow-lg hover:shadow-[#2997ff]/20 hover:shadow-xl transition-all duration-300"
+              style={{ minWidth: "180px" }}
             >
               Pre-order
             </Button>
             <Button 
-              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-6 px-8 text-lg font-medium rounded-full"
-              style={{ minWidth: "160px" }}
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white py-6 px-10 text-lg font-medium rounded-xl shadow-lg hover:shadow-white/10 hover:shadow-xl transition-all duration-300"
+              style={{ minWidth: "180px" }}
               onClick={() => setIsCustomizerOpen(true)}
             >
               Customize
@@ -98,7 +99,7 @@ const HeroSection = () => {
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mt-4"
+            className="mt-8"
           >
             <CountdownTimer />
           </motion.div>
