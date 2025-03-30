@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 
 const images = [
   "/images/night-sky.jpg",
-  "/images/urban-city.jpg",
-  "/images/sunset.jpg",
+  "/images/55.jpg",
+  "/images/6.gif",
   "/images/5.gif"
 ];
 
