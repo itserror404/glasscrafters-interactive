@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -8,7 +9,8 @@ import {
   Speaker, 
   Wifi, 
   Globe, 
-  Watch 
+  Watch,
+  Image
 } from 'lucide-react';
 
 const container = {
@@ -60,6 +62,41 @@ const SpecCard = ({
       </div>
       <div className="text-2xl md:text-3xl font-bold text-white mt-2 mb-2 font-sf-pro">{value}</div>
       <p className="text-sm text-white/70 font-sf-pro">{description}</p>
+      
+      <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#2997ff]/5 rounded-full blur-xl"></div>
+    </motion.div>
+  );
+};
+
+const ImageCard = ({ 
+  src, 
+  alt,
+  className = "" 
+}: { 
+  src: string; 
+  alt: string;
+  className?: string;
+}) => {
+  return (
+    <motion.div 
+      className={`glass-effect relative overflow-hidden ${className}`}
+      variants={item}
+    >
+      <div className="aspect-square w-full relative">
+        <img 
+          src={src} 
+          alt={alt} 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+      </div>
+      
+      <div className="absolute bottom-4 left-4 right-4">
+        <div className="flex items-center gap-2 text-white/90">
+          <Image size={16} className="text-[#2997ff]" />
+          <span className="text-sm font-medium">{alt}</span>
+        </div>
+      </div>
       
       <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#2997ff]/5 rounded-full blur-xl"></div>
     </motion.div>
@@ -151,6 +188,25 @@ const TechnicalDetails = () => {
           value="&lt;5ms"
           icon={<Watch size={24} />}
           description="Near-zero latency for seamless real-time interactions"
+        />
+        
+        {/* Image cards after Response Time */}
+        <ImageCard 
+          src="/images/feature-1.jpg" 
+          alt="Immersive Experience"
+          className="aspect-square"
+        />
+        
+        <ImageCard 
+          src="/images/feature-2.jpg" 
+          alt="Spatial Mapping"
+          className="aspect-square"
+        />
+        
+        <ImageCard 
+          src="/images/feature-3.jpg" 
+          alt="Gesture Control"
+          className="aspect-square"
         />
       </motion.div>
     </section>
