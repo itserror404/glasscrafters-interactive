@@ -2,7 +2,7 @@
 // Mock Sentry implementation for when packages aren't available
 const mockSentry = {
   init: () => console.log('Mock Sentry initialized (packages not installed)'),
-  ErrorBoundary: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  ErrorBoundary: ({ children }: { children: any }) => children, // Simplified version without JSX
 };
 
 // Export a safe version of Sentry that works whether the package is installed or not
